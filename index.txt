@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>هاك دلتا - Content Locker</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Cairo',sans-serif;
+background:#09090f;
+}
+
+.glow{
+box-shadow:
+0 0 25px rgba(168,85,247,.25),
+0 0 70px rgba(168,85,247,.1);
+}
+
+.card{
+background:rgba(17,24,39,.85);
+backdrop-filter: blur(16px);
+}
+
+</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-5">
+
+<div class="w-full max-w-md">
+
+<div class="card rounded-3xl border border-purple-500/20 p-6 glow">
+
+<img
+src="https://images.unsplash.com/photo-1614294148960-9aa740632a87?w=1000"
+class="rounded-2xl w-full h-56 object-cover"
+/>
+
+<h1 class="text-white text-center text-4xl font-black mt-7">
+
+🥷 هاك دلتا آخر إصدار
+
+</h1>
+
+<p class="text-gray-400 text-center mt-3">
+
+أكمل جميع الإجراءات لفتح الرابط
+
+</p>
+
+
+<div class="space-y-4 mt-8">
+
+<button id="task0"
+onclick="startTask(0)"
+class="taskBtn w-full rounded-2xl bg-red-600 hover:bg-red-700 py-5 text-white text-xl font-bold transition">
+
+▶ اشترك في القناة
+
+</button>
+
+<button id="task1"
+onclick="startTask(1)"
+class="taskBtn w-full rounded-2xl bg-red-600 hover:bg-red-700 py-5 text-white text-xl font-bold transition">
+
+👍 أعجب بالفيديو
+
+</button>
+
+<button id="task2"
+onclick="startTask(2)"
+class="taskBtn w-full rounded-2xl bg-red-600 hover:bg-red-700 py-5 text-white text-xl font-bold transition">
+
+💬 علّق على الفيديو
+
+</button>
+
+<button id="task3"
+onclick="startTask(3)"
+class="taskBtn w-full rounded-2xl bg-sky-600 hover:bg-sky-700 py-5 text-white text-xl font-bold transition">
+
+✈️ انضم إلى التليجرام
+
+</button>
+
+</div>
+
+
+<div class="mt-8">
+
+<div class="flex justify-between mb-3">
+
+<span class="text-gray-300">
+
+التقدم
+
+</span>
+
+<span id="progressText"
+class="text-green-400 font-bold">
+
+0/4
+
+</span>
+
+</div>
+
+
+<div class="bg-gray-800 h-3 rounded-full overflow-hidden">
+
+<div id="bar"
+
+class="bg-green-500 h-full w-0 transition-all duration-700">
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+
+id="unlockBtn"
+
+onclick="window.open(CONFIG.finalUrl,'_blank')"
+
+class="hidden w-full mt-8 py-5 rounded-2xl bg-green-600 hover:bg-green-700 text-white text-2xl font-bold">
+
+🔓 فتح الرابط
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ======================================================
+
+⚙️ CONFIGURATION
+
+يمكنك تعديل الروابط فقط هنا
+
+====================================================== */
+
+const CONFIG={
+
+channelUrl:"https://youtube.com/@fluke.1?si=v8zD-vqLNxheiXiu",
+
+likeVideoUrl:"https://youtu.be/AwjQYZaB5_c?si=tkKKAInLIy6d2Mgf",
+
+commentVideoUrl:"https://youtu.be/AwjQYZaB5_c?si=tkKKAInLIy6d2Mgf",
+
+telegramUrl:"https://t.me/Fluke191",
+
+finalUrl:"https://xdabo.com/dlta725"
+
+};
+
+
+/* ====================================================== */
+
+const tasks=[
+
+CONFIG.channelUrl,
+
+CONFIG.likeVideoUrl,
+
+CONFIG.commentVideoUrl,
+
+CONFIG.telegramUrl
+
+];
+
+
+const done=[false,false,false,false];
+
+
+function startTask(index){
+
+if(done[index]) return;
+
+const btn=document.getElementById("task"+index);
+
+window.open(tasks[index],"_blank");
+
+
+btn.disabled=true;
+
+btn.innerHTML="⏳ جاري التحقق...";
+
+
+setTimeout(()=>{
+
+done[index]=true;
+
+
+btn.innerHTML="✅ تم";
+
+btn.classList.remove(
+
+"bg-red-600",
+
+"bg-sky-600"
+
+);
+
+
+btn.classList.add(
+
+"bg-green-600"
+
+);
+
+
+updateProgress();
+
+},12000);
+
+}
+
+
+
+function updateProgress(){
+
+let completed=done.filter(x=>x).length;
+
+
+document.getElementById("progressText")
+
+.innerHTML=completed+"/4";
+
+
+document.getElementById("bar")
+
+.style.width=(completed/4)*100+"%";
+
+
+if(completed===4){
+
+document
+
+.getElementById("unlockBtn")
+
+.classList.remove("hidden");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
